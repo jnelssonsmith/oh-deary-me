@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# can run diff to see if 2 files are different
+
 if [ $# -eq 2 ]; then
     NOFLAG=1
     OUTFILE=$1
@@ -27,9 +29,11 @@ if [ ${NOFLAG} -eq 0 ]; then
     case "${FLAG}" in
         -g)
             echo "g flag detected"
+            tar -zcvf ${OUTFILE} ${INDIR}
             ;;
         -b)
             echo "b flag detected"
+            tar -jcvf ${OUTFILE} ${INDIR}
             ;;
         -c)
             echo "c flag detected"
@@ -41,5 +45,6 @@ if [ ${NOFLAG} -eq 0 ]; then
     esac
 else 
     echo "handling no flags"
+    tar -cvf ${OUTFILE}.tar ${INDIR}
 fi
     
