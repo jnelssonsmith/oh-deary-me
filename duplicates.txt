@@ -1,0 +1,2 @@
+testEnv/hello.txt testEnv/test/hello.txt testEnv/test/otherTest/hello.txt
+testEnv/test/a.txt testEnv/test/otherTest/a.txt testEnv/testDir/a.txt testEnv/testDir/anotherOne/a.txt

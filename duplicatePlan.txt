@@ -1,0 +1,9 @@
+So to find duplicates
+- have some master file listing
+- select a file
+- check to see if file names match 
+- compare that file against every other file in the directory recursively
+- if a file matches then add matched file to matched file array
+- remove that file from directory if possible
+- at the end remove base file and all matched files from search list
+- 
