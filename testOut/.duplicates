@@ -1,3 +1,0 @@
-testOut/hello.txt testOut/test/hello.txt testOut/test/otherTest/hello.txt
-testOut/test/a.txt testOut/test/otherTest/a.txt testOut/testDir/a.txt testOut/testDir/anotherOne/a.txt
-testOut/test/otherTest/testFile.png testOut/testDir/anotherOne/testFile.png testOut/testDir/testFile.png
