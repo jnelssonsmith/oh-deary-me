@@ -30,25 +30,25 @@ fi
 if [ ${NOFLAG} -eq 0 ]; then
     case "${FLAG}" in
         -g)
-            echo "g flag detected"
-            tar -zcvf ${OUTFILE}.tar.gz ${OUTFILE}
+            echo "g flag detected: compressing with gzip"
+            tar -zcf ${OUTFILE}.tar.gz ${OUTFILE}
             ;;
         -b)
-            echo "b flag detected"
-            tar -jcvf ${OUTFILE}.tar.bz2 ${OUTFILE}
+            echo "b flag detected: compressing with bzip2"
+            tar -jcf ${OUTFILE}.tar.bz2 ${OUTFILE}
             ;;
         -c)
-            echo "c flag detected"
-            tar -cvf ${OUTFILE}.tar ${OUTFILE}
-            compress -f ${OUTFILE}.tar
-            ;;
+            echo "c flag detected: compressing with compress"
+            tar -cf ${OUTFILE}.tar ${OUTFILE} >> /dev/null
+            compress -f ${OUTFILE}.tar #no need to apprend .Z, it is automatically appended
+            ;; 
         *)
             echo "Unsupported flag detected"
             exit 1
             ;;
     esac
 else 
-    echo "handling no flags"
+    echo "handling no flags: leaving file as tar"
     tar -cvf ${OUTFILE}.tar ${OUTFILE}
 fi
     

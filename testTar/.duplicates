@@ -1,0 +1,3 @@
+testTar/hello.txt testTar/test/hello.txt testTar/test/otherTest/hello.txt
+testTar/test/a.txt testTar/test/otherTest/a.txt testTar/testDir/a.txt testTar/testDir/anotherOne/a.txt
+testTar/test/otherTest/testFile.png testTar/testDir/anotherOne/testFile.png testTar/testDir/testFile.png

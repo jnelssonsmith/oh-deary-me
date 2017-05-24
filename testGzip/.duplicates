@@ -1,0 +1,3 @@
+testGzip/hello.txt testGzip/test/hello.txt testGzip/test/otherTest/hello.txt
+testGzip/test/a.txt testGzip/test/otherTest/a.txt testGzip/testDir/a.txt testGzip/testDir/anotherOne/a.txt
+testGzip/test/otherTest/testFile.png testGzip/testDir/anotherOne/testFile.png testGzip/testDir/testFile.png
