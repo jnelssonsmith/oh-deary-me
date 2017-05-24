@@ -1,7 +1,6 @@
 #!/bin/bash
-
-rm -rf testEnv
-rm -f duplicates.txt
-mkdir testEnv
-cp -R testBackup/* testEnv
-find testEnv | ./findDuplicates.pl
+rm -r testOut*
+./dear -g testOut testBackup/
+./dear -b testOut testBackup/
+./dear -c testOut testBackup/
+./dear testOut testBackup/
