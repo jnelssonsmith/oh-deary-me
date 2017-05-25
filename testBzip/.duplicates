@@ -1,3 +1,0 @@
-testBzip/hello.txt testBzip/test/hello.txt testBzip/test/otherTest/hello.txt
-testBzip/test/a.txt testBzip/test/otherTest/a.txt testBzip/testDir/a.txt testBzip/testDir/anotherOne/a.txt
-testBzip/test/otherTest/testFile.png testBzip/testDir/anotherOne/testFile.png testBzip/testDir/testFile.png

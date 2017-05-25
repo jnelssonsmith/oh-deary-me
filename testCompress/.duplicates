@@ -1,3 +1,0 @@
-testCompress/hello.txt testCompress/test/hello.txt testCompress/test/otherTest/hello.txt
-testCompress/test/a.txt testCompress/test/otherTest/a.txt testCompress/testDir/a.txt testCompress/testDir/anotherOne/a.txt
-testCompress/test/otherTest/testFile.png testCompress/testDir/anotherOne/testFile.png testCompress/testDir/testFile.png

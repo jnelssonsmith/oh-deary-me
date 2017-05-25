@@ -10,38 +10,55 @@ else
     exit 1
 fi
 
-if [[ $DIR =~ (.)*\.tar\.gz$ ]]; then
+GZIP_REGEX="(.+)\.tar\.gz$"
+BZIP2_REGEX="(.+)\.tar\.bz2$"
+COMPRESS_REGEX="(.+)\.tar\.Z$"
+TARFILE_REGEX="(.+)\.tar$"
+
+if [[ $DIR =~ $GZIP_REGEX ]]; then
+    BASENAME=${BASH_REMATCH[1]}
     echo "dir is gzip file"
-    echo "base name is ${BASH_REMATCH[1]}"
     tar -zxf $DIR
 
-elif [[ $DIR =~ (.)*\.tar\.bz2$ ]]; then
+elif [[ $DIR =~ $BZIP2_REGEX ]]; then
+    BASENAME=${BASH_REMATCH[1]}
     echo "dir is bzip2 file"
-    echo "base name is ${BASH_REMATCH[1]}"
     tar -jxf $DIR
 
-elif [[ $DIR =~ (.)*\.tar\.Z$ ]]; then
+elif [[ $DIR =~ $COMPRESS_REGEX ]]; then
+    BASENAME=${BASH_REMATCH[1]}
     echo "dir is compress file"
-    echo "base name is ${BASH_REMATCH[1]}"
+    uncompress -c $DIR > ${BASENAME}.tar
+    tar -xf ${BASENAME}.tar
 
-elif [[ $DIR =~ (.)*\.tar$ ]]; then
+elif [[ $DIR =~ $TARFILE_REGEX ]]; then
+    BASENAME=${BASH_REMATCH[1]}
     echo "dir is tar file"
-    echo "base name is ${BASH_REMATCH[1]}"
+    tar -xf $DIR
     
 else
     echo "Could not identify file type"
     exit 1
 fi
 
+DUPE_FILE_PATH=${BASENAME}/duplicates
 case "${FLAG}" in
     -d)
         echo "d flag detected: deleting duplicate files"
+        rm -f ${DUPE_FILE_PATH}
+        exit 0
         ;;
-    -b)
+    -l)
         echo "l flag detected: unarchiving dupes as soft links"
-        ;;
+        ./src/createSoftlinks.pl ${DUPE_FILE_PATH}
+        rm -f ${DUPE_FILE_PATH}
+        exit 0
+        ;; 
     -c)
         echo "c flag detected: unarchiving dupes as copies"
+        ./src/createCopies.pl ${DUPE_FILE_PATH}
+        rm -f ${DUPE_FILE_PATH}
+        exit 0
         ;; 
     *)
         echo "Unsupported flag detected"

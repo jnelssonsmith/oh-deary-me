@@ -20,7 +20,7 @@ fi
 if [ -d "${INDIR}" ]; then
     echo "Detected ${INDIR} as a directory"
     cp -R ${INDIR} ${OUTFILE}
-    find ${OUTFILE} | ./findDuplicates.pl ${OUTFILE}
+    find -f ${OUTFILE} | ./src/findDuplicates.pl ${OUTFILE}
 else
     echo "${INDIR} is not a directory"
     exit 1
@@ -31,19 +31,21 @@ if [ ${NOFLAG} -eq 0 ]; then
     case "${FLAG}" in
         -g)
             echo "g flag detected: compressing with gzip"
-            tar -zcf ${OUTFILE}.tar.gz ${OUTFILE}
+            tar -zcf $OUTFILE.tar.gz $OUTFILE
             ;;
         -b)
             echo "b flag detected: compressing with bzip2"
-            tar -jcf ${OUTFILE}.tar.bz2 ${OUTFILE}
+            tar -jcf $OUTFILE.tar.bz2 $OUTFILE
             ;;
         -c)
             echo "c flag detected: compressing with compress"
-            tar -cf ${OUTFILE}.tar ${OUTFILE} >> /dev/null
-            compress -f ${OUTFILE}.tar #no need to apprend .Z, it is automatically appended
+            tar -cf $OUTFILE.tar $OUTFILE
+            echo $OUTFILE.tar
+            compress -f $OUTFILE.tar #no need to apprend .Z, it is automatically appended
             ;; 
         *)
             echo "Unsupported flag detected"
+            rm -rf ${OUTFILE}
             exit 1
             ;;
     esac

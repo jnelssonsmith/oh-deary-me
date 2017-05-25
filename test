@@ -1,0 +1,123 @@
+#!/bin/bash
+rm -rf testFiles/out/*
+mkdir testFiles/out/dFlag testFiles/out/lFlag testFiles/out/cFlag
+echo "== TESTING G FLAG FOR DEAR (GZIP) =="
+./dear -g testFiles/out/dFlag/gzipFileTest testFiles/original/
+./dear -g testFiles/out/lFlag/gzipFileTest testFiles/original/
+./dear -g testFiles/out/cFlag/gzipFileTest testFiles/original/
+echo "== TESTING G FLAG FOR DEAR (BZIP2) =="
+./dear -b testFiles/out/dFlag/bzipFileTest testFiles/original/
+./dear -b testFiles/out/lFlag/bzipFileTest testFiles/original/
+./dear -b testFiles/out/cFlag/bzipFileTest testFiles/original/
+echo "== TESTING G FLAG FOR DEAR (COMPRESS) =="
+./dear -c testFiles/out/dFlag/compressFileTest testFiles/original/
+./dear -c testFiles/out/lFlag/compressFileTest testFiles/original/
+./dear -c testFiles/out/cFlag/compressFileTest testFiles/original/
+echo "== TESTING G FLAG FOR DEAR (TARFILE) =="
+./dear testFiles/out/dFlag/tarFileTest testFiles/original/
+./dear testFiles/out/lFlag/tarFileTest testFiles/original/
+./dear testFiles/out/cFlag/tarFileTest testFiles/original/
+
+echo "== TESTING D FLAG FOR UNDEAR (GZIP) =="
+./undear -d testFiles/out/dFlag/gzipFileTest.tar.gz
+echo "== TESTING D FLAG FOR UNDEAR (BZIP2) =="
+./undear -d testFiles/out/dFlag/bzipFileTest.tar.bz2
+echo "== TESTING D FLAG FOR UNDEAR (COMPRESS) =="
+./undear -d testFiles/out/dFlag/compressFileTest.tar.Z
+echo "== TESTING D FLAG FOR UNDEAR (TARFILE) =="
+./undear -d testFiles/out/dFlag/tarFileTest.tar
+
+echo "== TESTING L FLAG FOR UNDEAR (GZIP) =="
+./undear -l testFiles/out/lFlag/gzipFileTest.tar.gz
+echo "== TESTING L FLAG FOR UNDEAR (BZIP2) =="
+./undear -l testFiles/out/lFlag/bzipFileTest.tar.bz2
+echo "== TESTING L FLAG FOR UNDEAR (COMPRESS) =="
+./undear -l testFiles/out/lFlag/compressFileTest.tar.Z
+echo "== TESTING L FLAG FOR UNDEAR (TARFILE) =="
+./undear -l testFiles/out/lFlag/tarFileTest.tar
+
+echo "== TESTING C FLAG FOR UNDEAR (GZIP) =="
+./undear -c testFiles/out/cFlag/gzipFileTest.tar.gz
+echo "== TESTING C FLAG FOR UNDEAR (BZIP2) =="
+./undear -c testFiles/out/cFlag/bzipFileTest.tar.bz2
+echo "== TESTING C FLAG FOR UNDEAR (COMPRESS) =="
+./undear -c testFiles/out/cFlag/compressFileTest.tar.Z
+echo "== TESTING C FLAG FOR UNDEAR (TARFILE) =="
+./undear -c testFiles/out/cFlag/tarFileTest.tar
+
+echo "== TEST RESULTS =="
+
+VAL=`diff -x '.DS_Store' -rq testFiles/backups/correctDFlag/ testFiles/out/dFlag/gzipFileTest/ | wc -l`
+if [ $VAL -eq 0 ]; then
+    echo "✓ D flag for a gzipped file works"
+else 
+    echo "x D flag for a gzipped file failed"
+fi
+VAL=`diff -x '.DS_Store' -rq testFiles/backups/correctDFlag testFiles/out/dFlag/bzipFileTest | wc -l`
+if [ $VAL -eq 0 ]; then
+    echo "✓ D flag for a bzipped file works"
+else 
+    echo "x D flag for a bzipped file failed"
+fi
+VAL=`diff -x '.DS_Store' -rq testFiles/backups/correctDFlag testFiles/out/dFlag/compressFileTest | wc -l`
+if [ $VAL -eq 0 ]; then
+    echo "✓ D flag for a compress file works"
+else 
+    echo "x D flag for a compress file failed"
+fi
+VAL=`diff -x '.DS_Store' -rq testFiles/backups/correctDFlag testFiles/out/dFlag/tarFileTest| wc -l`
+if [ $VAL -eq 0 ]; then
+    echo "✓ D flag for a tar file works"
+else 
+    echo "x D flag for a tar file failed"
+fi
+
+VAL=`diff -x '.DS_Store' -rq testFiles/backups/correctLFlag testFiles/out/lFlag/gzipFileTest | wc -l`
+if [ $VAL -eq 0 ]; then
+    echo "✓ L flag for a gzipped file works"
+else 
+    echo "x L flag for a gzipped file failed"
+fi
+VAL=`diff -x '.DS_Store' -rq testFiles/backups/correctLFlag testFiles/out/lFlag/bzipFileTest | wc -l`
+if [ $VAL -eq 0 ]; then
+    echo "✓ L flag for a bzipped file works"
+else 
+    echo "x L flag for a bzipped file failed"
+fi
+VAL=`diff -x '.DS_Store' -rq testFiles/backups/correctLFlag testFiles/out/lFlag/compressFileTest | wc -l`
+if [ $VAL -eq 0 ]; then
+    echo "✓ L flag for a compress file works"
+else 
+    echo "x L flag for a compress file failed"
+fi
+VAL=`diff -x '.DS_Store' -rq testFiles/backups/correctLFlag testFiles/out/lFlag/tarFileTest| wc -l`
+if [ $VAL -eq 0 ]; then
+    echo "✓ L flag for a tar file works"
+else 
+    echo "x L flag for a tar file failed"
+fi
+
+VAL=`diff -x '.DS_Store' -rq testFiles/backups/correctCFlag testFiles/out/cFlag/gzipFileTest | wc -l`
+if [ $VAL -eq 0 ]; then
+    echo "✓ C flag for a gzipped file works"
+else 
+    echo "x C flag for a gzipped file failed"
+fi
+VAL=`diff -x '.DS_Store' -rq testFiles/backups/correctCFlag testFiles/out/cFlag/bzipFileTest | wc -l`
+if [ $VAL -eq 0 ]; then
+    echo "✓ C flag for a bzipped file works"
+else 
+    echo "x C flag for a bzipped file failed"
+fi
+VAL=`diff -x '.DS_Store' -rq testFiles/backups/correctCFlag testFiles/out/cFlag/compressFileTest | wc -l`
+if [ $VAL -eq 0 ]; then
+    echo "✓ C flag for a compress file works"
+else 
+    echo "x C flag for a compress file failed"
+fi
+VAL=`diff -x '.DS_Store' -rq testFiles/backups/correctCFlag testFiles/out/cFlag/tarFileTest| wc -l`
+if [ $VAL -eq 0 ]; then
+    echo "✓ C flag for a tar file works"
+else 
+    echo "x C flag for a tar file failed"
+fi

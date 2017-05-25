@@ -10,7 +10,7 @@ if(not defined $directory) {
 }
 
 my @filePaths = <STDIN>;
-open(my $fh, '>', "$directory/.duplicates") or die "Couldn't open file .duplicates.txt, $!";
+open(my $fh, '>', "$directory/duplicates") or die "Couldn't open file duplicates.txt, $!";
 my @ignoreArray = (0);
 foreach my $filePath (@filePaths) {
     
