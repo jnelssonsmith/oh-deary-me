@@ -45,6 +45,18 @@ Note that the flag is now required, which take the options:
 -l recreate duplicates as soft links to the original
 -c recreate duplicates as copies of the original
 
+
+== TESTS ==
+For convenience I have included a test script that runs all the different combinations of 
+flag for dear and undear and then checks the output against another prepared file that 
+has been created manually. 
+
+You can run the test via:
+$ ./test
+
+and clean up the test via:
+$ ./clean
+
 == LIMITATIONS == 
 The program has not been tested for installation (adding dear and undear to your path), so there is not 
 promise that it will work when not accessed by literal path. 
