@@ -2,6 +2,8 @@
 
 use strict;
 use Cwd;
+use File::Spec;
+use File::Basename;
 
 my $dir = getcwd;
 
@@ -14,7 +16,14 @@ while( my $line = <$fh>)  {
     my $originalFile = $files[0];
     while($index < $#files + 1) {
         my $currentFile = $files[$index];
-        system("ln -s $dir/$originalFile $currentFile");
+        
+        my $dirname = dirname("$dir/$currentFile");
+        chdir($dirname) or die "$!";
+        
+        my $rel_path = File::Spec->abs2rel( "$dir/$originalFile", "$dirname");
+        my $name = fileparse("$dir/$currentFile");
+        
+        system("ln -s $rel_path $name");
         $index++;
     }
 }
